@@ -1,8 +1,9 @@
-import React from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
-import { styled } from '@mui/system';
+import React from "react";
+import { Card, CardContent, Typography } from "@mui/material";
+import { styled } from "@mui/system";
 
 const StyledCard = styled(Card)`
+  position: relative;
   min-width: 160px;
   min-height: 212px;
   cursor: pointer;
@@ -10,6 +11,8 @@ const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 15px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 
   &:hover {
     transform: scale(1.05);
@@ -17,27 +20,57 @@ const StyledCard = styled(Card)`
   }
 `;
 
-const ImageContainer = styled('div')`
+const PriceTag = styled("div")`
+  position: absolute;
+  top: 10px; 
+  right: 10px;
+  background-color: #0066cc;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+`;
+
+const ImageContainer = styled("div")`
   width: 160px;
   height: 212px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px; // Aquí añadimos el margen
+  margin-top: 20px;
+  background: linear-gradient(135deg, #fafafa, #eaeaea);
+`;
+
+const Placeholder = styled("div")`
+  height: 20px;
 `;
 
 const Item = ({ brand, model, price, imgUrl }) => {
   return (
     <StyledCard>
+      {price && <PriceTag>{`${price} €`}</PriceTag>}
       <ImageContainer>
-        <img src={imgUrl} alt={model} style={{ maxWidth: '100%', maxHeight: '100%' }} />
+        <img
+          src={imgUrl}
+          alt={model}
+          style={{ maxWidth: "100%", maxHeight: "100%" }}
+        />
       </ImageContainer>
       <CardContent>
         <Typography variant="h6">{brand}</Typography>
         <Typography variant="body1">{model}</Typography>
-        <Typography variant="body2" color={price ? 'text.primary' : 'error'}>
-          {price ? `${price} €` : 'PREORDER NOW'}
-        </Typography>
+        {price ? (
+          <Placeholder />
+        ) : (
+          <Typography variant="body2" color="error">
+            PREORDER NOW
+          </Typography>
+        )}
       </CardContent>
     </StyledCard>
   );

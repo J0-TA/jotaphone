@@ -5,8 +5,8 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const Header = () => (
-      <AppBar position="static">
+const Header = ({ bgColor }) => (
+      <AppBar position="static" style={{ backgroundColor: bgColor }}>
         <Toolbar>
           <Typography variant="h4" style={{ flexGrow: 1, fontFamily: 'Oswald', fontWeight: '700' }}>
             Jotaphone
