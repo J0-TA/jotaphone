@@ -52,9 +52,9 @@ const Placeholder = styled("div")`
 
 const Item = ({ brand, model, price, imgUrl }) => {
   return (
-    <StyledCard>
-      {price && <PriceTag>{`${price} €`}</PriceTag>}
-      <ImageContainer>
+    <StyledCard data-testid="item-card">
+      {price && <PriceTag data-testid="price-tag">{`${price} €`}</PriceTag>}
+      <ImageContainer data-testid="image-container">
         <img
           src={imgUrl}
           alt={model}
@@ -62,12 +62,12 @@ const Item = ({ brand, model, price, imgUrl }) => {
         />
       </ImageContainer>
       <CardContent>
-        <Typography variant="h6">{brand}</Typography>
-        <Typography variant="body1">{model}</Typography>
+        <Typography variant="h6" data-testid="brand">{brand}</Typography>
+        <Typography variant="body1" data-testid="model">{model}</Typography>
         {price ? (
           <Placeholder />
         ) : (
-          <Typography variant="body2" color="error">
+          <Typography variant="body2" color="error" data-testid="preorder">
             PREORDER NOW
           </Typography>
         )}

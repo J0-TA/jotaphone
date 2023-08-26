@@ -21,8 +21,8 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <Box display="flex" justifyContent="flex-end" p={2}>
-      <Select value={filter} onChange={handleFilterChange}>
+    <Box display="flex" justifyContent="flex-end" p={2} data-testid="searchbar-container">
+      <Select value={filter} onChange={handleFilterChange} data-testid="searchbar-select">
         <MenuItem value={'brand'}>Brand</MenuItem>
         <MenuItem value={'model'}>Model</MenuItem>
         <MenuItem value={'price'}>Price</MenuItem>
@@ -32,8 +32,9 @@ const SearchBar = ({ onSearch }) => {
         value={searchTerm}
         onChange={handleChange}
         style={{ marginLeft: '1rem' }}
+        data-testid="searchbar-input"
       />
-      <IconButton onClick={resetSearch}>
+      <IconButton onClick={resetSearch} data-testid="searchbar-clear">
         <ClearIcon />
       </IconButton>
     </Box>
