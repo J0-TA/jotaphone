@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 import { styled } from "@mui/system";
+import { useNavigate } from 'react-router-dom';
+
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -50,9 +52,15 @@ const Placeholder = styled("div")`
   height: 20px;
 `;
 
-const Item = ({ brand, model, price, imgUrl }) => {
+const Item = ({ id, brand, model, price, imgUrl }) => {
+  const navigate = useNavigate();
+
+  const goToPDP = () => {
+    navigate(`/pdp/${id}`);
+  };
+
   return (
-    <StyledCard data-testid="item-card">
+    <StyledCard data-testid="item-card" onClick={goToPDP}>
       {price && <PriceTag data-testid="price-tag">{`${price} €`}</PriceTag>}
       <ImageContainer data-testid="image-container">
         <img
