@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { fetchItems } from '../API/itemsAPI';
-import ListView from '../components/ListView';
-import SearchBar from '../components/SearchBar';
+import React, { useState, useEffect } from "react";
+import { fetchItems } from "../API/itemsAPI";
+import ListView from "../components/ListView";
+import SearchBar from "../components/SearchBar";
 
 const PLP = () => {
   const [items, setItems] = useState([]);
@@ -9,17 +9,17 @@ const PLP = () => {
 
   useEffect(() => {
     fetchItems()
-      .then(data => {
+      .then((data) => {
         setItems(data);
         setFilteredItems(data);
       })
-      .catch(error => {
-        console.error('There was an error fetching the data:', error);
+      .catch((error) => {
+        console.error("There was an error fetching the data:", error);
       });
   }, []);
 
   const handleSearch = (term, filter) => {
-    const filtered = items.filter(item => 
+    const filtered = items.filter((item) =>
       item[filter].toLowerCase().includes(term.toLowerCase())
     );
     setFilteredItems(filtered);

@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Header from "./components/Header";
 import PLP from "./views/PLP";
+import PDP from "./views/PDP";
 
 import "./App.css";
 
@@ -27,7 +28,7 @@ const App = () => (
       <Header bgColor="#0066cc"/>
       <Routes>
         <Route path="/" element={<PLP />} />
-        {/* <Route path="/" exact component={PDP} /> */}
+        <Route path="/pdp/:id" element={<PDP />} />
       </Routes>
     </Router>
   </ThemeProvider>
