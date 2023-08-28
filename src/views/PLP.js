@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 const PLP = () => {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [loading, setLoading] = useState(true); // Nuevo estado para manejar la carga
+  const [loading, setLoading] = useState(true);
   const { setSelectedBrand, setSelectedModel } = useAppContext();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const PLP = () => {
         console.error("There was an error fetching the data:", error);
       })
       .finally(() => {
-        setLoading(false); // Finalizar la carga una vez que la promesa se haya resuelto o rechazado
+        setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
