@@ -17,3 +17,13 @@ export const fetchItemDetail = (id) => {
       throw error;
     });
 };
+
+export const submitItemtoCart = ( itemDetails ) => {
+  return axios.post(`${baseUrl}/cart`, itemDetails)
+    .then(response => {
+      return response.data.count;
+    })
+    .catch(error => {
+      console.error('Error adding item to chart', error);
+    });
+}
