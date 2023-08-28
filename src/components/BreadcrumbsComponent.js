@@ -21,7 +21,7 @@ const BreadcrumbsComponent = ({ brand, model}) => {
 
 
   return (
-    <div style={{ display: "flex", alignItems: "center", margin: "20px 0" }}>
+    <div style={{ display: "flex", alignItems: "center" }}>
       <GoBackButton goBack={goBack} disableButton={disableButton} />
       <Breadcrumbs aria-label="breadcrumb">
         <IconButton onClick={() => navigate("/")}>
