@@ -10,6 +10,10 @@ export const AppProvider = ({ children }) => {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
   const [cartItemsCount, setCartItemsCount] = useState(0);
+  
+  const updateCartCount = (newItems) => {
+    setCartItemsCount(prevCount => prevCount + newItems);
+  };
 
   return (
     <AppContext.Provider
@@ -20,6 +24,7 @@ export const AppProvider = ({ children }) => {
         setSelectedModel,
         cartItemsCount,
         setCartItemsCount,
+        updateCartCount
       }}
     >
       {children}

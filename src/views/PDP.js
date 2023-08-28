@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "../AppContext";
-import { fetchItemDetail } from "../API/itemsAPI";
+import { fetchItemDetail, submitItemtoCart } from "../API/itemsAPI";
 import { useParams } from "react-router-dom";
 import { Grid, CircularProgress } from "@mui/material";
 import { useTheme } from "@mui/system";
@@ -12,7 +12,7 @@ import FullProductDetails from "../components/FullProductDetails";
 const PDP = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [item, setItem] = useState([]);
-  const { setSelectedBrand, setSelectedModel } = useAppContext();
+  const { setSelectedBrand, setSelectedModel, updateCartCount } = useAppContext();
 
   const handleItemSelection = (brand, model) => {
     setSelectedBrand(brand);
@@ -21,8 +21,9 @@ const PDP = () => {
   const theme = useTheme();
   const { id } = useParams();
 
-  const handleAddToCart = (item) => {
-    console.log("Added to cart:", item);
+  const handleAddToCart = async (item) => {
+    const newCartItemsCount = await(submitItemtoCart(item));
+    updateCartCount(newCartItemsCount);
   };
 
   useEffect(() => {
