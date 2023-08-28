@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useAppContext } from "../AppContext";
 import { fetchItems } from "../API/itemsAPI";
+import { Box, CircularProgress, Snackbar, Alert } from "@mui/material";
 import ListView from "../components/ListView";
 import SearchBar from "../components/SearchBar";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 
 const PLP = () => {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const { setSelectedBrand, setSelectedModel } = useAppContext();
 
   useEffect(() => {
@@ -22,6 +22,7 @@ const PLP = () => {
       })
       .catch((error) => {
         console.error("There was an error fetching the data:", error);
+        setOpenErrorSnackbar(true);
       })
       .finally(() => {
         setLoading(false);
@@ -39,13 +40,27 @@ const PLP = () => {
   return (
     <div data-testid="plp-container">
       {loading ? (
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
           <CircularProgress size={80} />
         </Box>
       ) : (
         <>
           <SearchBar onSearch={handleSearch} />
           <ListView items={filteredItems} />
+          <Snackbar
+            open={openErrorSnackbar}
+            autoHideDuration={6000}
+            onClose={() => setOpenErrorSnackbar(false)}
+          >
+            <Alert onClose={() => setOpenErrorSnackbar(false)} severity="error">
+              There was an error!
+            </Alert>
+          </Snackbar>
         </>
       )}
     </div>

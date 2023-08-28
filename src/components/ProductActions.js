@@ -10,7 +10,7 @@ import {
   CardContent
 } from "@mui/material";
 
-const ProductActions = ({ product, handleAddToCart }) => {
+const ProductActions = ({ product, handleAddToCart, disableButton }) => {
   const { options } = product;
   const [storage, setStorage] = useState(
     options.storages.length === 1 ? options.storages[0].name : ""
@@ -73,7 +73,7 @@ const ProductActions = ({ product, handleAddToCart }) => {
           variant="contained" 
           color="primary" 
           onClick={handleCartClick}
-          disabled={!storage || !color}
+          disabled={!storage || !color || disableButton}
         >
           Add to Cart
         </Button>

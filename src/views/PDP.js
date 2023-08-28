@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "../AppContext";
-import { fetchItemDetail, submitItemtoCart } from "../API/itemsAPI";
 import { useParams } from "react-router-dom";
-import { Grid, CircularProgress } from "@mui/material";
+import { fetchItemDetail, submitItemtoCart } from "../API/itemsAPI";
+import { Grid, CircularProgress, Snackbar, Alert } from "@mui/material";
 import { useTheme } from "@mui/system";
 import ProductImage from "../components/ProductImage";
 import ProductDetails from "../components/ProductDetails";
@@ -12,7 +12,11 @@ import FullProductDetails from "../components/FullProductDetails";
 const PDP = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [item, setItem] = useState([]);
-  const { setSelectedBrand, setSelectedModel, updateCartCount } = useAppContext();
+  const [disableButton, setDisableButton] = useState(false);
+  const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+  const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
+  const { setSelectedBrand, setSelectedModel, updateCartCount } =
+    useAppContext();
 
   const handleItemSelection = (brand, model) => {
     setSelectedBrand(brand);
@@ -22,8 +26,17 @@ const PDP = () => {
   const { id } = useParams();
 
   const handleAddToCart = async (item) => {
-    const newCartItemsCount = await(submitItemtoCart(item));
-    updateCartCount(newCartItemsCount);
+    setDisableButton(true);
+    try {
+      const newCartItemsCount = await submitItemtoCart(item);
+      updateCartCount(newCartItemsCount);
+      setOpenSuccessSnackbar(true);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      setOpenErrorSnackbar(true);
+    } finally {
+      setDisableButton(false);
+    }
   };
 
   useEffect(() => {
@@ -36,6 +49,7 @@ const PDP = () => {
       .catch((error) => {
         console.error("There was an error fetching the data:", error);
         setIsLoading(false);
+        setOpenErrorSnackbar(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
@@ -66,11 +80,33 @@ const PDP = () => {
           </Grid>
           <Grid item xs={12} md={8}>
             <ProductDetails product={item} />
-            <ProductActions product={item} handleAddToCart={handleAddToCart} />
+            <ProductActions product={item} handleAddToCart={handleAddToCart} disableButton={disableButton} />
           </Grid>
           <Grid item xs={12} style={{ marginTop: "20px" }}>
             <FullProductDetails product={item} style={{ width: "100%" }} />
           </Grid>
+          <Snackbar
+            open={openErrorSnackbar}
+            autoHideDuration={6000}
+            onClose={() => setOpenErrorSnackbar(false)}
+          >
+            <Alert onClose={() => setOpenErrorSnackbar(false)} severity="error">
+              There was an error!
+            </Alert>
+          </Snackbar>
+
+          <Snackbar
+            open={openSuccessSnackbar}
+            autoHideDuration={6000}
+            onClose={() => setOpenSuccessSnackbar(false)}
+          >
+            <Alert
+              onClose={() => setOpenSuccessSnackbar(false)}
+              severity="success"
+            >
+              Item added to cart!
+            </Alert>
+          </Snackbar>
         </Grid>
       )}
     </div>
