@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import SearchBar from './SearchBar';
+import SearchBar from '../components/SearchBar';
 
 describe('SearchBar', () => {
   it('renders without crashing', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ListView from './ListView';
+import ListView from '../components/ListView';
 
 const mockItems = [
   { brand: "Apple", model: "iPhone 13", price: 999, imgUrl: "some-url" },
