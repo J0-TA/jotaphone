@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ListView from '../components/ListView';
-import Item from '../components/Item';
 
 jest.mock('../components/Item', () => () => <div data-testid="mock-item"></div>);
 
