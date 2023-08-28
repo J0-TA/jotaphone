@@ -21,7 +21,7 @@ const Header = ({ bgColor }) => {
           >
             Jotaphone
           </Typography>
-          <IconButton color="inherit">
+          <IconButton color="inherit" aria-label="Shopping Cart Icon">
             <Badge badgeContent={cartItemsCount} color="error" showZero>
               <ShoppingCartIcon />
             </Badge>

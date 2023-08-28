@@ -7,7 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import GoBackButton from './GoBackButton';
 
 const BreadcrumbsComponent = ({ brand, model}) => {
-  const [disableButton, setDisableButton] = useState("true");
+  const [disableButton, setDisableButton] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   
