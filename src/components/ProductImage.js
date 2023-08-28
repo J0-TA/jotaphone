@@ -2,20 +2,20 @@ import { Box, Typography } from "@mui/material";
 
 const ProductImage = ({ imageUrl, alt, price, brand, model }) => {
   return (
-    <Box position="relative" style={{ width: "100%", textAlign: "center" }}>
+    <Box position="relative" sx={{ width: '100%', textAlign: 'center' }}>
       <Typography variant="h3" gutterBottom>
         {brand}
       </Typography>
       <Typography variant="h5" gutterBottom>
         {model}
       </Typography>
-      <Box position="relative" style={{ width: "100%", height: "auto" }}>
+      <Box position="relative" sx={{ width: '100%', height: 'auto' }}>
         <img
           src={imageUrl}
           alt={alt}
-          style={{
-            width: "100%",
-            height: "auto",
+          sx={{
+            width: { xs: '100%', sm: '400px', md: '500px' }, // Puedes ajustar estos valores
+            height: 'auto',
           }}
         />
         {price ? (
@@ -26,8 +26,8 @@ const ProductImage = ({ imageUrl, alt, price, brand, model }) => {
               right: 10,
               backgroundColor: "#0066cc",
               borderRadius: "50%",
-              width: '100px',
-              height: '100px',
+              width: 100,
+              height: 100,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
