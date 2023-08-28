@@ -3,10 +3,13 @@ import { useAppContext } from "../AppContext";
 import { fetchItems } from "../API/itemsAPI";
 import ListView from "../components/ListView";
 import SearchBar from "../components/SearchBar";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const PLP = () => {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { setSelectedBrand, setSelectedModel } = useAppContext();
 
   useEffect(() => {
@@ -19,6 +22,9 @@ const PLP = () => {
       })
       .catch((error) => {
         console.error("There was an error fetching the data:", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -32,8 +38,16 @@ const PLP = () => {
 
   return (
     <div data-testid="plp-container">
-      <SearchBar onSearch={handleSearch} />
-      <ListView items={filteredItems} />
+      {loading ? (
+        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+          <CircularProgress size={80} />
+        </Box>
+      ) : (
+        <>
+          <SearchBar onSearch={handleSearch} />
+          <ListView items={filteredItems} />
+        </>
+      )}
     </div>
   );
 };
