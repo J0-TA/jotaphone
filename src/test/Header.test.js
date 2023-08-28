@@ -16,7 +16,7 @@ describe('Header', () => {
     );
 
     expect(screen.getByText('Jotaphone')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /shoppingcarticon/i })).toBeInTheDocument();
+    expect(screen.getByTestId('ShoppingCartIcon')).toBeInTheDocument();
   });
 
   it('applies the background color passed as a prop', () => {
