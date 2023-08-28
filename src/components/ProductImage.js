@@ -14,7 +14,7 @@ const ProductImage = ({ imageUrl, alt, price, brand, model }) => {
           src={imageUrl}
           alt={alt}
           sx={{
-            width: { xs: '100%', sm: '400px', md: '500px' }, // Puedes ajustar estos valores
+            width: { xs: '100%', sm: '400px', md: '500px' },
             height: 'auto',
           }}
         />
