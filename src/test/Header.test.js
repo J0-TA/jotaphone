@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
-import { AppProvider } from '../AppContext'; // Ajusta esta ruta según sea necesario
-import Header from '../components/Header';  // Ajusta esta ruta según sea necesario
+import { AppProvider } from '../AppContext'; 
+import Header from '../components/Header';
 
 describe('Header', () => {
   it('renders without crashing', () => {
