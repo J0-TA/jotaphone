@@ -29,7 +29,7 @@ const Header = ({ bgColor }) => {
         </Toolbar>
       </AppBar>
       <Toolbar />
-      <div style={{ display: "flex", alignItems: "center", margin: "20px 0" }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
         <BreadcrumbsComponent brand={selectedBrand} model={selectedModel}/>
       </div>
     </>
