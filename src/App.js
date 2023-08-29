@@ -6,6 +6,7 @@ import theme from "./muiTheme";
 import Header from "./components/Header";
 import PLP from "./views/PLP";
 import PDP from "./views/PDP";
+import NotFoundPage from "./views/NotFoundPage";
 
 import "./App.css";
 
@@ -18,10 +19,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<PLP />} />
             <Route path="/pdp/:id" element={<PDP />} />
+            <Route path="*" element={<NotFoundPage />} /> 
           </Routes>
         </Router>
       </ThemeProvider>
-      ƒ
     </AppProvider>
   );
 };

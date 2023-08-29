@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "../AppContext";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchItemDetail, submitItemtoCart } from "../API/itemsAPI";
 import { Grid, CircularProgress, Snackbar, Alert } from "@mui/material";
 import { useTheme } from "@mui/system";
@@ -17,6 +17,7 @@ const PDP = () => {
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const { setSelectedBrand, setSelectedModel, updateCartCount } =
     useAppContext();
+  const navigate = useNavigate();
 
   const handleItemSelection = (brand, model) => {
     setSelectedBrand(brand);
@@ -50,6 +51,7 @@ const PDP = () => {
         console.error("There was an error fetching the data:", error);
         setIsLoading(false);
         setOpenErrorSnackbar(true);
+        navigate("/404"); 
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
@@ -80,7 +82,11 @@ const PDP = () => {
           </Grid>
           <Grid item xs={12} md={8}>
             <ProductDetails product={item} />
-            <ProductActions product={item} handleAddToCart={handleAddToCart} disableButton={disableButton} />
+            <ProductActions
+              product={item}
+              handleAddToCart={handleAddToCart}
+              disableButton={disableButton}
+            />
           </Grid>
           <Grid item xs={12} style={{ marginTop: "20px" }}>
             <FullProductDetails product={item} style={{ width: "100%" }} />

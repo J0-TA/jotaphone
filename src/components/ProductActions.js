@@ -13,10 +13,10 @@ import {
 const ProductActions = ({ product, handleAddToCart, disableButton }) => {
   const { options } = product;
   const [storage, setStorage] = useState(
-    options.storages.length === 1 ? options.storages[0].name : ""
+    options?.storages?.length === 1 ? options?.storages[0]?.name : ""
   );
   const [color, setColor] = useState(
-    options.colors.length === 1 ? options.colors[0].name : ""
+    options?.colors?.length === 1 ? options?.colors[0]?.name : ""
   );
 
   const handleStorageChange = (event) => {
@@ -29,11 +29,11 @@ const ProductActions = ({ product, handleAddToCart, disableButton }) => {
 
   const handleCartClick = () => {
     if (storage && color) {
-      const colorOption = options.colors.find(option => option.name === color);
-      const storageOption = options.storages.find(option => option.name === storage);
+      const colorOption = options?.colors.find(option => option.name === color);
+      const storageOption = options?.storages.find(option => option.name === storage);
 
       handleAddToCart({
-        id: product.id,
+        id: product?.id,
         colorCode: colorOption.code,
         storageCode: storageOption.code
       });
@@ -41,7 +41,6 @@ const ProductActions = ({ product, handleAddToCart, disableButton }) => {
       alert("Please select both storage and color.");
     }
   };
-
   return (
     <Card elevation={3} sx={{ margin: "0 auto", width: "65%", marginTop: '20px' }}>
       <CardContent>
@@ -49,7 +48,7 @@ const ProductActions = ({ product, handleAddToCart, disableButton }) => {
           <FormControl fullWidth variant="standard" required>
             <InputLabel>Storage</InputLabel>
             <Select value={storage} onChange={handleStorageChange}>
-              {options.storages.map(({ code, name }) => (
+              {options?.storages.map(({ code, name }) => (
                 <MenuItem key={code} value={name}>
                   {name}
                 </MenuItem>
@@ -61,7 +60,7 @@ const ProductActions = ({ product, handleAddToCart, disableButton }) => {
           <FormControl fullWidth variant="standard" required>
             <InputLabel>Color</InputLabel>
             <Select value={color} onChange={handleColorChange}>
-              {options.colors.map(({ code, name }) => (
+              {options?.colors.map(({ code, name }) => (
                 <MenuItem key={code} value={name}>
                   {name}
                 </MenuItem>
